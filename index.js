@@ -75,8 +75,25 @@ app.post('/userRegistration', function(req, res){
 app.post('/hola', function(req, res){
     res.send("[POST]Saludos desde express")
 });
+app.post('/usuario', function(req, res){
+    if(!req.user.nombre && !req.user.apellido){
+        respuesta = {
+            error: true,
+            codigo: 502,
+            mensaje: "Usuario y contraseña requeridos"
+            
+        }
 
+    }else if(req.user.nombre !== "Carlos"|| req.user.apellido =="Cuevas"){
+        respuesta={
+            error: true,
+            codigo: 503,
+            mensaje: "Usuario existente"
+        }
+
+    }
+});
 
 app.listen(3000, ()=>{
-    console.log("El servidor esta inicializando en el puerto 30000");
+    console.log("El servidor esta inicializando en el puerto 3000");
 })
